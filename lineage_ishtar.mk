@@ -65,6 +65,22 @@ TARGET_INCLUDE_LIVE_WALLPAPERS := false
 # Debugging
 TARGET_INCLUDE_MATLOG := true
 
-# Maintainer
-#ALPHA_BUILD_TYPE := Official
-ALPHA_MAINTAINER := OzanKaya
+# Disable touch video heatmap to reduce latency, motion jitter, and CPU usage
+# on supported devices with Deep Press input classifier HALs and models
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.input.video_enabled=false
+
+# Disable blur on app-launch
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.launcher.blur.appLaunch=false
+
+# Fling Sysprops
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.min.fling_velocity=50 \
+    ro.max.fling_velocity=16000
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    pm.dexopt.boot=verify \
+    pm.dexopt.first-boot=quicken \
+    pm.dexopt.install=speed-profile \
+    pm.dexopt.bg-dexopt=everything
